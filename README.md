@@ -9,4 +9,6 @@ writing a python flask server that uses the saved model to serve http requests. 
 
 The project also includes a web app that has been deployed on Heroku, where users can input information about a house and get a predicted price for it based on the model. The app provides an interactive and user-friendly interface for users to get an estimate of house prices in Bengaluru.
 
+follow this link https://bengaluru-homeprice-pred.herokuapp.com/ to visit website
+
 ![image](https://github.com/KarthikGowdaRamakrishna/Know-Before-You-Buy---Bengaluru-House-Price-Predictor/assets/144963620/2915e860-473d-4987-8680-5cd3d80f60ff)
