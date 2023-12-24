@@ -26,4 +26,4 @@ I have tried Liner regression, Ridge & Lasso model and their respective scores a
 ## 4. Deployment
 
 I have used Ridge model and created webapp using flask,HTMLand bootstrap.
-Deployment is done on Heroku: [Web App]([[https://house-price-predictor-banglore.herokuapp.com/](https://bangalore-home-price-predictor.herokuapp.com/)https://bangalore-home-price-predictor.herokuapp.com/]
+Deployment is done on Heroku: [Web App](https://bangalore-home-price-predictor.herokuapp.com/)https://bangalore-home-price-predictor.herokuapp.com/)
