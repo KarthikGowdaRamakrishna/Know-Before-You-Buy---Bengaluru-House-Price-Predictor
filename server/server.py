@@ -1,29 +1,39 @@
-import pandas as pd
-import numpy as np
-from flask import Flask, render_template,request
-import pickle
+from flask import Flask, request, jsonify
+import util
 
-app=Flask(__name__)
-data=pd.read_csv("model/bengaluru_house_prices.csv")
-pipe=pickle.load(open("banglore_home_prices_model.pickle","rb"))
+app = Flask(__name__)
 
-@app.route('/')
-def index():
 
-    locations=sorted(data["location"].unique())
-    return render_template('index.html', locations=locations)
+@app.route('/get_location_names', methods=['GET'])
+def get_location_names():
+    response = jsonify({
+        'locations': util.get_location_names()
+    })
+    response.headers.add('Access-Control-Allow-Origin', '*')
 
-@app.route('/predict', methods=['POST'])
-def predict():
-    locations=request.form.get('location')
-    bhk = float(request.form.get('Bhk'))
-    bath = float(request.form.get('bath'))
-    sqft = float(request.form.get('total_sqft'))
-    print(locations,bhk,bath,sqft)
+    return response
 
-    input=pd.DataFrame([[locations,sqft,bath,bhk]],columns=["location","total_sqft","bath","Bhk"])
-    prediction=str(np.round((pipe.predict(input)[0]+0.2)/100,2)) # I have converted Lakhs into Crores. Since data set is old, so I have added 0.2(20lakhs to compansate inflation.
-    return "As per your requirement the predicted house price is {} crore".format(prediction)
 
-if __name__=="__main__":
-    app.run(debug=True,port=5000)
+@app.route('/predict_home_price', methods=['GET', 'POST'])
+def predict_home_price():
+    total_sqft = float(request.form['total_sqft'])
+    location = request.form['location']
+    bhk = int(request.form['bhk'])
+    bath = int(request.form['bath'])
+
+    response = jsonify({
+        'estimated_price': util.get_estimated_price(location, total_sqft, bhk, bath)
+    })
+    response.headers.add('Access-Control-Allow-Origin', '*')
+
+    return response
+
+@app.route('/hello', methods=['GET'])
+def landing():
+    return "hi to you"
+
+
+if __name__ == "__main__":
+    print("Starting Python Flask Server For Home Priceeeeeeeeeeeeeeeeeeee Prediction...")
+    util.load_saved_artifacts()
+    app.run()
