@@ -4,8 +4,8 @@ from flask import Flask, render_template,request
 import pickle
 
 app=Flask(__name__)
-data=pd.read_csv("Data/Clean_data.csv")
-pipe=pickle.load(open("Ridge_Model.pkl","rb"))
+data=pd.read_csv("model/bengaluru_house_prices.csv")
+pipe=pickle.load(open("banglore_home_prices_model.pickle","rb"))
 
 @app.route('/')
 def index():
