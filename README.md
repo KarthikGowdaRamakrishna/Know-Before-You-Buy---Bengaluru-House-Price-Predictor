@@ -1,14 +1,29 @@
-# Know-Before-You-Buy---Bengaluru-House-Price-Predictor
-EDA and Price Prediction on Bengaluru House Price dataset (Banglore being my my Hometown)
+# Bengluru-House-Price-Predictor (Regression Problem)
 
-This project aims to predict house prices in Bengaluru using machine learning techniques. The dataset used for this project is the Bengaluru Houses Price Dataset, which contains information on various attributes of houses in Bengaluru, such as location, size, number of bedrooms, and other features.
+<img width="90%" src="https://user-images.githubusercontent.com/70078572/174433131-b5eac5a2-edc1-4baf-b99d-45fe80fccde9.gif">
 
-Data pre-processing was done using statistical imputation, one-hot encoding, and label encoding techniques to clean and process the data. Three different models were used for the prediction: Lasso, Decision Tree, and Linear Regression. The best accuracy achieved for the prediction was 87% using Linear Regression.
+## 1. Problem Definition
 
-writing a python flask server that uses the saved model to serve http requests. Third component is the website built in html, css and javascript that allows user to enter home square ft area, bedrooms etc and it will call python flask server to retrieve the predicted price
+  Buying a home, especially in a city like Bengaluru, is a tricky choice. While the major factors are usually the same for all metros, there are others to be considered for the Silicon Valley of India. With its help millennial crowd, vibrant culture, great climate and a slew of job opportunities, it is difficult to ascertain the price of a house in Bengaluru.
 
-The project also includes a web app that has been deployed on Heroku, where users can input information about a house and get a predicted price for it based on the model. The app provides an interactive and user-friendly interface for users to get an estimate of house prices in Bengaluru.
+Goal is to predict the price of houses in Banglore city based on Area, No. of BHK, No. of Bathrooms and Area in Sqft.
 
-follow this link https://bengaluru-homeprice-pred.herokuapp.com/ to visit website
+## 2. Data
 
-![image](https://github.com/KarthikGowdaRamakrishna/Know-Before-You-Buy---Bengaluru-House-Price-Predictor/assets/144963620/2915e860-473d-4987-8680-5cd3d80f60ff)
+[dataset from Kaggle](https://www.kaggle.com/datasets/amitabhajoy/bengaluru-house-price-data)
+
+In the data set, historical house prices of Banglore city. Include things like location, total_sqft, balcony and more.
+
+## 3. Model
+
+I have tried Liner regression, Ridge & Lasso model and their respective scores are as follows;
+
+"Linerregression": 0.8381860339652341
+"Lasso": 0.8263029869374969
+"Ridge": 0.8383227066936583
+
+
+## 4. Deployment
+
+I have used Ridge model and created webapp using flask,HTML .
+Deployment is done on Heroku: [Web App](https://house-price-predictor-banglore.herokuapp.com/)
