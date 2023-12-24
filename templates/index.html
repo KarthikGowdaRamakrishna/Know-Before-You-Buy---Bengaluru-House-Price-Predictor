@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.rtl.min.css" integrity="sha384-dc2NSrAXbAkjrdm9IYrX10fQq9SDG6Vjz7nQVKdKcJl3pC+k37e7qJR5MVSCS+wR" crossorigin="anonymous">
+    <style>
+      body {
+            height: 1080px;
+            background: linear-gradient(to bottom, #004e92  25%, #6dd5ed  100%);
+           }
+
+      .card{
+            height: 600px;
+            background: linear-gradient(to bottom, #FDFCFB   20%, #E2D1C3  100%);
+            text: white;
+      }
+    </style>
+    <title>House price predictor</title>
+  </head>
+  <body class="p-3 bg-info text-black">
+    <div class='container'>
+      <div class="row">
+        <div class="card" style="height:200; width: 100%; margin-top: 100px">
+          <div class="card-header" style="text-align: center">
+            <h1>Banglore House Price Predictor</h1>
+          </div>
+          <div class="card-body">
+            <form method="post" accept-charset="utf-8">
+              <div class="row">
+                <div class="col-md-6 form-group" style="text-align: center">
+                  <label><b>Select the Location</b></label>
+                  <select class="select-picker form-control" id="location" name="location" required="1">
+                    {% for location in locations %}
+                      <option value="{{location}}">{{location}}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="col-md-6 form-group" style="text-align: center">
+                  <label><b>Number of BHK ?</b></label>
+                  <input type="text" class="form-control" id="Bhk" name="Bhk" placeholder="Enter BHK">
+                </div>
+                <div class="col-md-6 form-group" style="text-align: center">
+                  <label><b>Number of Bathroom ?</b></label>
+                  <input type="text" class="form-control" id="bath" name="bath" placeholder="Enter number of Bathroom">
+                </div>
+                <div class="col-md-6 form-group" style="text-align: center">
+                  <label><b>Area in Square feet ?</b></label>
+                  <input type="text" class="form-control" id="total_sqft" name="total_sqft" placeholder="Enter area in sqft.">
+                </div>
+                  <div>
+                    <br>
+                 </div>
+                 <div class="col-md-50 form-group">
+                   <button class="btn btn-primary form-control" onclick="send_data()">Predict Price</button>
+                </div>
+              </div>
+            </form>
+            <br>
+            <div class="col-md-12" style="text-align: center">
+              <h3><span id="prediction"></span></h3>
+            </div>
+
+        </div>
+
+      </div>
+
+
+    </div>
+    <script>
+      function form_handler(event){
+        event.preventDefault(); // Don't submit the form normally
+      }
+
+      function send_data()
+      {
+        document.querySelector('form').addEventListener("submit",form_handler);
+        var fd=new FormData(document.querySelector('form'));
+        var xhr=new XMLHttpRequest();
+        xhr.open('POST','/predict',true);
+        document.getElementById("prediction").innerHTML="Wait Predicting Price...";
+        xhr.onreadystatechange=function(){
+          if(xhr.readyState==XMLHttpRequest.DONE){
+            document.getElementById("prediction").innerHTML=xhr.responseText;
+          }
+         }
+         xhr.onload=function(){};
+         xhr.send(fd);
+      }
+    </script>
+
+
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
+
+  </body>
+</html>
